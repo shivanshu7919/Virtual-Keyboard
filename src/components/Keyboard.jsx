@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
 
 function Keyboard() {
-  const [inputText,setInputText]=useState("abb");
-  const [isCaps,SetIsCaps]=useState(false);
-  const [isShift,SetIsShift]=useState(false);
+  const [inputText,setInputText]=useState("");
+  const [isCaps,setIsCaps]=useState(false);
+  const [isShift,setIsShift]=useState(false);
 
   const handleKeyClick=(keyValue)=>{
    if(keyValue==='Tab'){
@@ -54,12 +54,39 @@ function Keyboard() {
   }
 
   const handleCapsKey=()=>{
-    console.log(1)
+    const updatedCaps=!isCaps;
+    setIsCaps(updatedCaps);
+    const keys=document.querySelectorAll('.key');
+    keys.forEach((key)=>{
+      const firstSpanElement=key.querySelector('span:first-child');
+      if(firstSpanElement){
+        const keyText=firstSpanElement.innerText.toLowerCase();
+        if(!['shift','alt','ctrl','caps','tab','enter'].includes(keyText)){
+          firstSpanElement.innerText=((updatedCaps && isShift) || (!updatedCaps && !isShift))?keyText.toLowerCase():keyText.toUpperCase();
+        }
+        if(keyText==='caps'){
+          firstSpanElement.parentElement.style.backgroundColor=(updatedCaps)?'blue':'#445760';
+        }
+      }
+    })
   }
 
   const handleShiftKey=()=>{
-    const shift=!isShift;
-    SetIsShift(shift);
+    const updatedShift=!isShift;
+    setIsShift(updatedShift);
+    const keys=document.querySelectorAll('.key');
+    keys.forEach((key)=>{
+      const firstSpanElement=key.querySelector('span:first-child');
+      if(firstSpanElement){
+        const keyText=firstSpanElement.innerText.toLowerCase();
+        if(!['shift','alt','caps','tab','enter','ctrl'].includes(keyText)){
+          firstSpanElement.innerText=((updatedShift && isCaps) || (!updatedShift && !isCaps))?keyText.toLowerCase():keyText.toUpperCase();
+        }
+        if(keyText==='shift'){
+          firstSpanElement.parentElement.style.backgroundColor=(updatedShift)?'blue':'#445760';
+        }
+      }
+    })
   }
 
   const handleCtrlKey=()=>{
@@ -71,8 +98,30 @@ function Keyboard() {
   }
 
   const handleRegularKey=(key)=>{
-    const text=key;
-    setInputText((prev)=>prev+key);
+    const keys=key.split(/[_.]/);
+    let newContent;
+    if(keys.length>1){
+      if(isShift){
+        if(keys.length===3){
+          if(keys[0]==='>') newContent=inputText+'>';
+          else newContent=inputText+'_';
+        }
+        else newContent=inputText+keys[0];
+      }
+      else{
+        if(keys.length===3){
+          if(keys[0]==='>') newContent=inputText+'.';
+          else newContent=inputText+'-';
+        }
+        else newContent=inputText+keys[1];
+      }
+    }
+    else{
+      let character=((isShift && isCaps) || (!isShift && !isCaps))?key.toLowerCase():key.toUpperCase();
+      newContent=inputText+character;
+    }
+
+    setInputText(newContent);
   }
   
 
@@ -95,7 +144,7 @@ function Keyboard() {
         <div className='grid grid-cols-14'>
           {['~.`','@.2','#.3','$.4','%.5','^.6','&.7','*.8','(.9',').0','_.-','+.=','<i className="fa-solid fa-delete-left"></i>']
             .map((keyValue)=>(
-              <div key={keyValue} className='key border-2 p-2 m-0.5'
+              <div key={keyValue} className='key border-2 p-2 m-0.5 bg-[#445760]'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
@@ -119,9 +168,9 @@ function Keyboard() {
         </div>
 
         <div className='row grid grid-cols-13'>
-          {['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{_[', '}_]']
+          {['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{_[', '}_]']
             .map((keyValue)=>(
-              <div key={keyValue} className='key p-2 border-2 m-0.5'
+              <div key={keyValue} className='key p-2 border-2 m-0.5 bg-[#445760]'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
@@ -139,9 +188,9 @@ function Keyboard() {
         </div>
 
         <div className='row grid grid-cols-13'>
-          {['Caps','A','S','D','F','G','H','J','K','L',':_;','"_\'','Enter']
+          {['Caps','a','s','d','f','g','h','j','k','l',':_;','"_\'','Enter']
             .map((keyValue)=>(
-              <div key={keyValue} className='key p-2 border-2 m-0.5'
+              <div key={keyValue} className='key p-2 border-2 m-0.5 bg-[#445760]'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
@@ -159,9 +208,9 @@ function Keyboard() {
         </div>
         
         <div className='row grid grid-cols-11'>
-          {['Shift','Z','X','C','V','B','N','M','<_,','>_.','?_/']
+          {['Shift','z','x','c','v','b','n','m','<_,','>_.','?_/']
             .map((keyValue)=>(
-              <div key={keyValue} className='key p-2  border-2 m-0.5'
+              <div key={keyValue} className='key p-2  border-2 m-0.5 bg-[#445760]'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
@@ -183,7 +232,7 @@ function Keyboard() {
         <div className='row grid grid-cols-8'>
           {['Ctrl','Alt',' ','Alt','Ctrl','<','>']
             .map((keyValue,index)=>(
-              <div key={index} className='key border-2 p-2 m-0.5'
+              <div key={index} className='key border-2 p-2 m-0.5 bg-[#445760]'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
