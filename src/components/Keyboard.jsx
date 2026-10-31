@@ -65,7 +65,7 @@ function Keyboard() {
           firstSpanElement.innerText=((updatedCaps && isShift) || (!updatedCaps && !isShift))?keyText.toLowerCase():keyText.toUpperCase();
         }
         if(keyText==='caps'){
-          firstSpanElement.parentElement.style.backgroundColor=(updatedCaps)?'blue':'#445760';
+          firstSpanElement.parentElement.style.backgroundColor=(updatedCaps)?'blue':'#D1D5DB';
         }
       }
     })
@@ -83,7 +83,7 @@ function Keyboard() {
           firstSpanElement.innerText=((updatedShift && isCaps) || (!updatedShift && !isCaps))?keyText.toLowerCase():keyText.toUpperCase();
         }
         if(keyText==='shift'){
-          firstSpanElement.parentElement.style.backgroundColor=(updatedShift)?'blue':'#445760';
+          firstSpanElement.parentElement.style.backgroundColor=(updatedShift)?'blue':'#D1D5DB';
         }
       }
     })
@@ -130,7 +130,7 @@ function Keyboard() {
       <h1 className='text-center bg-red-500 p-5 text-3xl'>Virtual Keyboard</h1>
       <div className='flex justify-center'>
 
-        <input 
+        <textarea 
         type="text" 
         className='w-1/2 border-2 rounded-2xl py-5 px-5 m-10'
         placeholder='Enter Text'
@@ -144,7 +144,7 @@ function Keyboard() {
         <div className='grid grid-cols-14'>
           {['~.`','@.2','#.3','$.4','%.5','^.6','&.7','*.8','(.9',').0','_.-','+.=','<i className="fa-solid fa-delete-left"></i>']
             .map((keyValue)=>(
-              <div key={keyValue} className='key border-2 p-2 m-0.5 bg-[#445760]'
+              <div key={keyValue} className='key border-2 p-2 m-0.5 bg-gray-300'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
@@ -170,7 +170,7 @@ function Keyboard() {
         <div className='row grid grid-cols-13'>
           {['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{_[', '}_]']
             .map((keyValue)=>(
-              <div key={keyValue} className='key p-2 border-2 m-0.5 bg-[#445760]'
+              <div key={keyValue} className='key p-2 border-2 m-0.5 bg-gray-300'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
@@ -190,7 +190,7 @@ function Keyboard() {
         <div className='row grid grid-cols-13'>
           {['Caps','a','s','d','f','g','h','j','k','l',':_;','"_\'','Enter']
             .map((keyValue)=>(
-              <div key={keyValue} className='key p-2 border-2 m-0.5 bg-[#445760]'
+              <div key={keyValue} className='key p-2 border-2 m-0.5 bg-gray-300'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
@@ -210,7 +210,7 @@ function Keyboard() {
         <div className='row grid grid-cols-11'>
           {['Shift','z','x','c','v','b','n','m','<_,','>_.','?_/']
             .map((keyValue)=>(
-              <div key={keyValue} className='key p-2  border-2 m-0.5 bg-[#445760]'
+              <div key={keyValue} className='key p-2  border-2 m-0.5 bg-gray-300'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
@@ -232,7 +232,7 @@ function Keyboard() {
         <div className='row grid grid-cols-8'>
           {['Ctrl','Alt',' ','Alt','Ctrl','<','>']
             .map((keyValue,index)=>(
-              <div key={index} className='key border-2 p-2 m-0.5 bg-[#445760]'
+              <div key={index} className='key border-2 p-2 m-0.5 bg-gray-300'
                 onClick={()=>handleKeyClick(keyValue)}
               >
                 {
