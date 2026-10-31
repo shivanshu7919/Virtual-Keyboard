@@ -149,6 +149,7 @@ function Keyboard({inputText,setInputText}) {
                     keyValue==='<i className="fa-solid fa-delete-left"></i>'?(
                       <button>
                         <i className="fa-solid fa-delete-left"></i>
+                        BackSpace
                       </button>
                     ):(
                       <span>{keyValue}</span>
