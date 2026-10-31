@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 
-function Keyboard() {
-  const [inputText,setInputText]=useState("");
+function Keyboard({inputText,setInputText}) {
+  
   const [isCaps,setIsCaps]=useState(false);
   const [isShift,setIsShift]=useState(false);
 
@@ -127,17 +127,10 @@ function Keyboard() {
 
   return (
     <>
-      <h1 className='text-center bg-red-500 p-5 text-3xl'>Virtual Keyboard</h1>
+      
       <div className='flex justify-center'>
 
-        <textarea 
-        type="text" 
-        className='w-1/2 border-2 rounded-2xl py-5 px-5 m-10'
-        placeholder='Enter Text'
-        value={inputText}
-        onChange={(e)=>setInputText(e.target.value)}
-        />
-
+        
       </div>
 
       <div className='row justify-center items-center w-2/3 max-w-full m-auto border-2 p-2 rounded-xl bg-amber-50'>
